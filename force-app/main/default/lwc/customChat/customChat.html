@@ -1,0 +1,71 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 08-13-2020
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   08-13-2020   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+-->
+<template>
+    <section role="log" class="slds-chat">
+        <ul class="slds-chat-list">
+            <li class="slds-chat-listitem slds-chat-listitem_bookend">
+                <div class="slds-chat-bookend">
+                    <span class="slds-icon_container slds-icon-utility-chat slds-chat-icon">
+                        <svg class="slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true">
+                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#chat"></use>
+                        </svg>
+                    </span>
+                    <p>Chat started by
+                        <b>{currentUserName}</b> • {initialTime}</p>
+                </div>
+            </li>
+        <template for:each={messageList} for:item="Inmessage" for:index="index"> 
+            <div key={Inmessage.key}>
+            <li  if:true={Inmessage.value.enableInBoundMessage} class="slds-chat-listitem slds-chat-listitem_inbound">
+                <div class="slds-chat-message">
+                    <span aria-hidden="true" class="slds-avatar slds-avatar_circle slds-chat-avatar">
+                        <abbr class="slds-avatar__initials slds-avatar__initials_inverse"
+                            title={currentUserName}>{currentUserName}</abbr>
+                    </span>
+                    <div class="slds-chat-message__body">
+                        <div class="slds-chat-message__text slds-chat-message__text_inbound">
+                            <span>{Inmessage.value.messagetext}</span>
+                        </div>
+                        <div class="slds-chat-message__meta" aria-label="said Andy Martinez at 4:59 PM">{currentUserName}•
+                            {Inmessage.value.time}</div>
+                    </div>
+                </div>
+            </li>
+        <!-- </div>         -->
+        <!-- </template>
+        <template for:each={messageList} for:item="outmessage" for:index="index1" >  -->
+            <!-- <div key={message.key}> -->
+            <li if:true={Inmessage.value.enableOutBoundMessage} class="slds-chat-listitem slds-chat-listitem_outbound">
+                <div class="slds-chat-message">
+                    <div class="slds-chat-message__body">
+                        <div class="slds-chat-message__text slds-chat-message__text_outbound">
+                            <span>{Inmessage.value.messagetext}</span>
+                        </div>
+                        <div class="slds-chat-message__meta" aria-label="said Amber Cann at 5:23 PM">{currentUserName} • {Inmessage.value.time}                            </div>
+                    </div>
+                </div>
+            </li>
+        </div>        
+        </template>
+            <div class="slds-form-element">
+                <!-- <div class="slds-form-element__control">
+                  <input type="text" id="text-input-id-1" placeholder="Type your Message Here" required="" class="slds-input" />
+                </div> placeholder="Type your Message Here" -->
+                <lightning-input type="text" name="message"        
+                
+                required=""
+                onchange={handleMessage}
+                onkeypress={handleEnter} value={emptyMessage}>
+                </lightning-input>
+              </div>            
+        </ul>
+    </section>  
+</template>
